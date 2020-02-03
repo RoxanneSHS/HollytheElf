@@ -1,0 +1,406 @@
+BACKUP ~HollyElf/backup~
+AUTHOR ~Roxanne@baldursextendedworld.com based on a Charles Bisson's CtB quest~
+
+AUTO_TRA ~HollyElf/TRA~
+
+VERSION ~v0.1~
+
+LANGUAGE ~English~ ~english~ ~HollyElf/TRA/setup.tra~
+
+BEGIN ~Holly the Elf~
+
+COPY ~HollyElf/Bam~ ~override~
+
+COPY ~HollyElf/Cre/CB901SCK.CRE~ ~override~
+SAY NAME1 @650691
+SAY NAME2 @650691
+
+COMPILE ~HollyElf/baf~
+COMPILE ~HollyElf/d~
+EXTEND_TOP ~ar0901.bcs~ ~HollyElf/Extend/ar0901.baf~
+EXTEND_BOTTOM ~ar1900.bcs~ ~HollyElf/Extend/ar1900.baf~
+EXTEND_BOTTOM ~ar1400.bcs~ ~HollyElf/Extend/ar1400.baf~
+EXTEND_BOTTOM ~ar1404.bcs~ ~HollyElf/Extend/ar1404.baf~
+EXTEND_BOTTOM ~ar1700.bcs~ ~HollyElf/Extend/ar1700.baf~
+EXTEND_BOTTOM ~ar1200.bcs~ ~HollyElf/Extend/ar1200.baf~
+EXTEND_BOTTOM ~ar1300.bcs~ ~HollyElf/Extend/ar1300.baf~
+EXTEND_BOTTOM ~ar1304.bcs~ ~HollyElf/Extend/ar1304.baf~
+
+ADD_JOURNAL @39 @40 USING ~HollyElf/TRA/CB901SCK.TRA~
+
+COPY ~HollyElf/itm/CB901CHG.ITM~ ~override~
+  SAY NAME1 @660207
+  SAY NAME2 @660211
+  SAY UNIDENTIFIED_DESC @660213
+  SAY DESC @660217
+COPY ~HollyElf/itm/CB901CMS.ITM~ ~override~
+  SAY NAME1 @660207
+  SAY NAME2 @660209
+  SAY UNIDENTIFIED_DESC @660213
+  SAY DESC @660215
+COPY ~HollyElf/itm/CB901ELD.ITM~ ~override~
+  SAY NAME1 @660207
+  SAY NAME2 @660210
+  SAY UNIDENTIFIED_DESC @660213
+  SAY DESC @660216
+COPY ~HollyElf/itm/CB901PCH.ITM~ ~override~
+  SAY NAME1 @660207
+  SAY NAME2 @660208
+  SAY UNIDENTIFIED_DESC @660213
+  SAY DESC @660214
+COPY ~HollyElf/itm/CB901WRM.ITM~ ~override~
+  SAY NAME1 @660207
+  SAY NAME2 @660212
+  SAY UNIDENTIFIED_DESC @660213
+  SAY DESC @660218
+COPY ~HollyElf/itm/CBHOLLY1.ITM~ ~override~
+  SAY NAME2 @660219
+  SAY DESC @660220
+COPY ~HollyElf/itm/CBHOLLY2.ITM~ ~override~
+  SAY NAME2 @660219
+  SAY DESC @660220
+  SAY 0x1ce @650047
+  SAY 0x1fe @650048
+  SAY 0x22e @650049
+  SAY 0x25e @650050
+  SAY 0x28e @650051
+  
+
+COPY_EXISTING ~AR1900.ARE~ ~override~
+	READ_SHORT 0x5a  "infotrig_num"
+	READ_LONG  0x5c  "infotrig_offset"
+	SET info_1=1
+	FOR( cnt=0; cnt<"%infotrig_num%"; cnt=cnt+1 ) BEGIN
+	READ_ASCII ("%infotrig_offset%"+0xc4*cnt)       "info_name"
+		PATCH_IF (("%info_name%" STRING_COMPARE_CASE "CouchGrassInfo")=0) BEGIN
+			info_1=0
+		END
+	END
+	PATCH_IF (info_1=1) BEGIN
+		LPF fj_are_structure
+			INT_VAR
+			fj_type         		= 1    					
+			fj_box_left     		= 197                        
+			fj_box_top      		= 1090                      
+			fj_box_right    		= 830                        
+			fj_box_bottom   		= 1453                      
+			fj_cursor_idx           = 22						
+			fj_trap_active          = 1                       
+			fj_loc_x				= 513                        
+			fj_loc_y				= 1302                     
+			fj_vertex_0     		= 245 + (1449 << 16)    
+			fj_vertex_1     		= 403 + (1292 << 16)    
+			fj_vertex_2     		= 654 + (1156 << 16)    
+			fj_vertex_3     		= 800 + (1212 << 16)    
+			fj_vertex_4     		= 785 + (1124 << 16)
+			fj_vertex_5     		= 672 + (1085 << 16)    
+			fj_vertex_6     		= 435 + (1184 << 16)    
+			fj_vertex_7     		= 226 + (1375 << 16)    
+			STR_VAR                                                     
+			fj_structure_type   = region                                
+			fj_name             = CouchGrassInfo                        
+			fj_reg_script       = CB1900DS					
+		END
+		LPF fj_are_structure
+			INT_VAR
+			fj_type        			= 8
+			fj_loc_x       			= 531 
+			fj_loc_y       			= 1302
+			fj_box_left    			= 197 
+			fj_box_top     			= 1080
+			fj_box_right   			= 830 
+			fj_box_bottom  			= 1453
+			fj_vertex_0     		= 245 + (1449 << 16)    
+			fj_vertex_1     		= 403 + (1292 << 16)    
+			fj_vertex_2     		= 654 + (1156 << 16)    
+			fj_vertex_3     		= 800 + (1212 << 16)    
+			fj_vertex_4     		= 785 + (1124 << 16)
+			fj_vertex_5     		= 672 + (1085 << 16)    
+			fj_vertex_6     		= 435 + (1184 << 16)    
+			fj_vertex_7     		= 226 + (1375 << 16)   
+			STR_VAR
+			fj_structure_type = container
+			fj_name           = ~CouchGrassCont~
+		END
+		LPF fj_are_structure
+			INT_VAR
+			fj_con_itm_idx    = SHORT_AT 0x74 - 1
+			fj_flags          = 1 // identified
+			fj_charge0		  = 1
+			STR_VAR
+			fj_name           = CB901CHG
+			fj_structure_type = itm
+		END
+	END
+
+COPY_EXISTING ~AR1400.ARE~ ~override~
+              ~AR1404.ARE~ ~override~
+ 	READ_SHORT 0x5a  "infotrig_num"
+	READ_LONG  0x5c  "infotrig_offset"
+	SET info_1=1
+	FOR( cnt=0; cnt<"%infotrig_num%"; cnt=cnt+1 ) BEGIN
+	READ_ASCII ("%infotrig_offset%"+0xc4*cnt)       "info_name"
+		PATCH_IF (("%info_name%" STRING_COMPARE_CASE "ClubMossInfo")=0) BEGIN
+			info_1=0
+		END
+	END
+	PATCH_IF (info_1=1) BEGIN
+		LPF fj_are_structure
+			INT_VAR
+			fj_type         		= 1    					
+			fj_box_left     		= 2518                       
+			fj_box_top      		= 133                       
+			fj_box_right    		= 2650                       
+			fj_box_bottom   		= 220                       
+			fj_cursor_idx           = 22						
+			fj_trap_active          = 1                       
+			fj_loc_x				= 2712                       
+			fj_loc_y				= 174                      
+			fj_vertex_0     		= 2515 + (182 << 16)    
+			fj_vertex_1     		= 2547 + (205 << 16)    
+			fj_vertex_2     		= 2622 + (207 << 16)    
+			fj_vertex_3     		= 2645 + (204 << 16)    
+			fj_vertex_4     		= 2615 + (128 << 16)
+			fj_vertex_5     		= 2585 + (132 << 16)    
+			fj_vertex_6     		= 2561 + (140 << 16)    
+			fj_vertex_7     		= 2537 + (144 << 16)    
+			STR_VAR                                                     
+			fj_structure_type   = region                                
+			fj_name             = ClubMossInfo                        
+			fj_reg_script       = CB1400DS					
+		END
+		LPF fj_are_structure
+			INT_VAR
+			fj_type        			= 8
+			fj_loc_x       			= 2712
+			fj_loc_y       			= 174 
+			fj_box_left    			= 2513
+			fj_box_top     			= 123 
+			fj_box_right   			= 2650
+			fj_box_bottom  			= 220 
+			fj_vertex_0     		= 2515 + (182 << 16)    
+			fj_vertex_1     		= 2547 + (205 << 16)    
+			fj_vertex_2     		= 2622 + (207 << 16)    
+			fj_vertex_3     		= 2645 + (204 << 16)    
+			fj_vertex_4     		= 2615 + (128 << 16)
+			fj_vertex_5     		= 2585 + (132 << 16)    
+			fj_vertex_6     		= 2561 + (140 << 16)    
+			fj_vertex_7     		= 2537 + (144 << 16) 
+			STR_VAR
+			fj_structure_type = container
+			fj_name           = ~ClubMossCont~
+		END
+		LPF fj_are_structure
+			INT_VAR
+			fj_con_itm_idx    = SHORT_AT 0x74 - 1
+			fj_flags          = 1
+			fj_charge0		  = 1
+			STR_VAR
+			fj_name           = CB901CMS
+			fj_structure_type = itm
+		END
+	END			  
+
+COPY_EXISTING ~AR1700.ARE~ ~override~
+	READ_SHORT 0x5a  "infotrig_num"
+	READ_LONG  0x5c  "infotrig_offset"
+	SET info_1=1
+	FOR( cnt=0; cnt<"%infotrig_num%"; cnt=cnt+1 ) BEGIN  //triggers loop
+	READ_ASCII ("%infotrig_offset%"+0xc4*cnt)       "info_name"
+		PATCH_IF (("%info_name%" STRING_COMPARE_CASE "WormwoodInfo")=0) BEGIN  //if already exists
+			info_1=0
+		END
+	END
+	PATCH_IF (info_1=1) BEGIN
+		LPF fj_are_structure
+			INT_VAR
+			fj_type         		= 1    					
+			fj_box_left     		= 3157                       
+			fj_box_top      		= 184                       
+			fj_box_right    		= 3358                       
+			fj_box_bottom   		= 682                       
+			fj_cursor_idx           = 22						
+			fj_trap_active          = 1                       
+			fj_loc_x				= 3170                       
+			fj_loc_y				= 570                      
+			fj_vertex_0     		= 3154 + (600 << 16)    
+			fj_vertex_1     		= 3263 + (672 << 16)    
+			fj_vertex_2     		= 3286 + (572 << 16)    
+			fj_vertex_3     		= 3317 + (503 << 16)    
+			fj_vertex_4     		= 3291 + (474 << 16)
+			fj_vertex_5     		= 3210 + (481 << 16)    
+			fj_vertex_6     		= 3169 + (517 << 16)    
+			fj_vertex_7     		= 3190 + (571 << 16)    
+			STR_VAR                                                     
+			fj_structure_type   = region                                
+			fj_name             = WormwoodInfo                        
+			fj_reg_script       = CB1700DS					
+		END
+		LPF fj_are_structure
+			INT_VAR
+			fj_type        			= 8 //nonvisible
+			fj_loc_x       			= 3179
+			fj_loc_y       			= 582
+			fj_box_left    			= 3152
+			fj_box_top     			= 184
+			fj_box_right   			= 3358
+			fj_box_bottom  			= 682
+			fj_vertex_0     		= 3154 + (600 << 16)    
+			fj_vertex_1     		= 3263 + (672 << 16)    
+			fj_vertex_2     		= 3286 + (572 << 16)    
+			fj_vertex_3     		= 3317 + (503 << 16)    
+			fj_vertex_4     		= 3291 + (474 << 16)
+			fj_vertex_5     		= 3210 + (481 << 16)    
+			fj_vertex_6     		= 3169 + (517 << 16)    
+			fj_vertex_7     		= 3190 + (571 << 16)    
+			STR_VAR
+			fj_structure_type = container
+			fj_name           = ~WormwoodCont~
+		END
+		LPF fj_are_structure
+			INT_VAR
+			fj_con_itm_idx    = SHORT_AT 0x74 - 1 // a new container will be last in the file
+			fj_flags          = 1 // identified
+			fj_charge0		  = 1
+			STR_VAR
+			fj_name           = CB901WRM
+			fj_structure_type = itm
+		END
+	END
+
+COPY_EXISTING ~AR1200.ARE~ ~override~
+	READ_SHORT 0x5a  "infotrig_num"
+	READ_LONG  0x5c  "infotrig_offset"
+	SET info_1=1
+	FOR( cnt=0; cnt<"%infotrig_num%"; cnt=cnt+1 ) BEGIN
+	READ_ASCII ("%infotrig_offset%"+0xc4*cnt)       "info_name"
+		PATCH_IF (("%info_name%" STRING_COMPARE_CASE "PeachTreeInfo")=0) BEGIN
+			info_1=0
+		END
+	END
+	PATCH_IF (info_1=1) BEGIN
+		LPF fj_are_structure
+			INT_VAR
+			fj_type         		= 1    					
+			fj_box_left     		= 2487                       
+			fj_box_top      		= 3158                      
+			fj_box_right    		= 2825                       
+			fj_box_bottom   		= 3491                      
+			fj_cursor_idx           = 22						
+			fj_trap_active          = 1                       
+			fj_loc_x				= 2757                       
+			fj_loc_y				= 3530                     
+			fj_vertex_0     		= 2482 + (3438 << 16)    
+			fj_vertex_1     		= 2560 + (3475 << 16)    
+			fj_vertex_2     		= 2751 + (3471 << 16)    
+			fj_vertex_3     		= 2820 + (3325 << 16)    
+			fj_vertex_4     		= 2752 + (3226 << 16)
+			fj_vertex_5     		= 2618 + (3212 << 16)    
+			fj_vertex_6     		= 2520 + (3230 << 16)    
+			fj_vertex_7     		= 2535 + (3312 << 16)    
+			STR_VAR                                                     
+			fj_structure_type   = region                                
+			fj_name             = PeachTreeInfo                        
+			fj_reg_script       = CB1200DS					
+		END
+		LPF fj_are_structure
+			INT_VAR
+			fj_type        			= 8
+			fj_loc_x       			= 2757
+			fj_loc_y       			= 3530
+			fj_box_left    			= 2482
+			fj_box_top     			= 3158
+			fj_box_right   			= 2825
+			fj_box_bottom  			= 3491
+			fj_vertex_0     		= 2482 + (3438 << 16)    
+			fj_vertex_1     		= 2560 + (3475 << 16)    
+			fj_vertex_2     		= 2751 + (3471 << 16)    
+			fj_vertex_3     		= 2820 + (3325 << 16)    
+			fj_vertex_4     		= 2752 + (3226 << 16)
+			fj_vertex_5     		= 2618 + (3212 << 16)    
+			fj_vertex_6     		= 2520 + (3230 << 16)    
+			fj_vertex_7     		= 2535 + (3312 << 16)
+			STR_VAR
+			fj_structure_type = container
+			fj_name           = ~PeachTreeCont~
+		END
+		LPF fj_are_structure
+			INT_VAR
+			fj_con_itm_idx    = SHORT_AT 0x74 - 1
+			fj_flags          = 1
+			fj_charge0		  = 1
+			STR_VAR
+			fj_name           = CB901PCH
+			fj_structure_type = itm
+		END
+	END
+
+
+COPY_EXISTING ~AR1300.ARE~ ~override~
+              ~AR1304.ARE~ ~override~
+ 	READ_SHORT 0x5a  "infotrig_num"
+	READ_LONG  0x5c  "infotrig_offset"
+	SET info_1=1
+	FOR( cnt=0; cnt<"%infotrig_num%"; cnt=cnt+1 ) BEGIN  //triggers loop
+	READ_ASCII ("%infotrig_offset%"+0xc4*cnt)       "info_name"
+		PATCH_IF (("%info_name%" STRING_COMPARE_CASE "ElderberryInfo")=0) BEGIN  //if already exists
+			info_1=0
+		END
+	END
+	PATCH_IF (info_1=1) BEGIN
+		LPF fj_are_structure
+			INT_VAR
+			fj_type         		= 1    					
+			fj_box_left     		= 2677                       
+			fj_box_top      		= 3363                       
+			fj_box_right    		= 3157                       
+			fj_box_bottom   		= 3566                       
+			fj_cursor_idx           = 22						
+			fj_trap_active          = 1                       
+			fj_loc_x				= 3033                       
+			fj_loc_y				= 3620                      
+			fj_vertex_0     		= 2681 + (3559 << 16)    
+			fj_vertex_1     		= 3133 + (3555 << 16)    
+			fj_vertex_2     		= 3097 + (3446 << 16)    
+			fj_vertex_3     		= 3002 + (3376 << 16)    
+			fj_vertex_4     		= 2902 + (3381 << 16)
+			fj_vertex_5     		= 2741 + (3360 << 16)    
+			fj_vertex_6     		= 2718 + (3387 << 16)    
+			fj_vertex_7     		= 2676 + (3519 << 16)    
+			STR_VAR                                                     
+			fj_structure_type   = region                                
+			fj_name             = ElderberryInfo                        
+			fj_reg_script       = CB1300DS					
+		END
+		LPF fj_are_structure
+			INT_VAR
+			fj_type        			= 8 //nonvisible
+			fj_loc_x       			= 3034
+			fj_loc_y       			= 3622
+			fj_box_left    			= 2672
+			fj_box_top     			= 3354
+			fj_box_right   			= 3157
+			fj_box_bottom  			= 3566
+			fj_vertex_0     		= 2681 + (3559 << 16)    
+			fj_vertex_1     		= 3133 + (3555 << 16)    
+			fj_vertex_2     		= 3097 + (3446 << 16)    
+			fj_vertex_3     		= 3002 + (3376 << 16)    
+			fj_vertex_4     		= 2902 + (3381 << 16)
+			fj_vertex_5     		= 2741 + (3360 << 16)    
+			fj_vertex_6     		= 2718 + (3387 << 16)    
+			fj_vertex_7     		= 2676 + (3519 << 16) 
+			STR_VAR
+			fj_structure_type = container
+			fj_name           = ~ElderberryCont~
+		END
+		LPF fj_are_structure
+			INT_VAR
+			fj_con_itm_idx    = SHORT_AT 0x74 - 1 // a new container will be last in the file
+			fj_flags          = 1 // identified
+			fj_charge0		  = 1
+			STR_VAR
+			fj_name           = CB901ELD
+			fj_structure_type = itm
+		END
+	END
+

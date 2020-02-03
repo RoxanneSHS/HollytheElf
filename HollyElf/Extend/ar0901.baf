@@ -1,0 +1,8 @@
+IF
+Global("CbAllAlongTheWatchtower","AR0901",0)
+THEN
+RESPONSE #100
+SetGlobal("CbAllAlongTheWatchtower","AR0901",1)
+CreateCreature("CB901SCK",[1083.906],6) 
+Continue()
+END

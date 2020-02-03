@@ -1,0 +1,19 @@
+IF
+Global("CbCouchGrassInfoClicked","AR1900",0)
+THEN
+RESPONSE #100
+TriggerActivation("CouchGrassInfo",TRUE)
+ContainerEnable("CouchGrassCont",FALSE)
+Continue()
+END
+
+IF
+Global("CbCouchGrassInfoClicked","AR1900",1)
+THEN
+RESPONSE #100
+TriggerActivation("CouchGrassInfo",FALSE)
+ContainerEnable("CouchGrassCont",TRUE)
+Continue()
+END
+
+
