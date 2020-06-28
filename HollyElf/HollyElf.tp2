@@ -27,7 +27,7 @@ EXTEND_BOTTOM ~ar1200.bcs~ ~HollyElf/Extend/ar1200.baf~
 EXTEND_BOTTOM ~ar1300.bcs~ ~HollyElf/Extend/ar1300.baf~
 EXTEND_BOTTOM ~ar1304.bcs~ ~HollyElf/Extend/ar1304.baf~
 
-ADD_JOURNAL @39 @40 USING ~HollyElf/TRA/CB901SCK.TRA~
+ADD_JOURNAL @39 @40 USING ~HollyElf/%s/CB901SCK.TRA~
 
 COPY ~HollyElf/itm/CB901CHG.ITM~ ~override~
   SAY NAME1 @660207
