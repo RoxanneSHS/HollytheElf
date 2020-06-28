@@ -1,11 +1,12 @@
 BACKUP ~HollyElf/backup~
 AUTHOR ~Roxanne@baldursextendedworld.com based on a Charles Bisson's CtB quest~
 
-AUTO_TRA ~HollyElf/TRA~
+AUTO_TRA ~HollyElf/%s~
 
-VERSION ~v0.1~
+VERSION ~v0.2~
 
-LANGUAGE ~English~ ~english~ ~HollyElf/TRA/setup.tra~
+LANGUAGE ~English~ ~english~ ~HollyElf/English/setup.tra~
+LANGUAGE ~Russian (by Arcanecoast.ru)~ ~russian~ ~HollyElf/Russian/setup.tra~
 
 BEGIN ~Holly the Elf~
 
