@@ -3,10 +3,11 @@ AUTHOR ~Roxanne@baldursextendedworld.com based on a Charles Bisson's CtB quest~
 
 AUTO_TRA ~HollyElf/%s~
 
-VERSION ~v0.2~
+VERSION ~v0.3~
 
 LANGUAGE ~English~ ~english~ ~HollyElf/English/setup.tra~
 LANGUAGE ~Russian (by Arcanecoast.ru)~ ~russian~ ~HollyElf/Russian/setup.tra~
+LANGUAGE ~Deutsch~ ~German~ ~HollyElf/German/setup.tra~
 
 BEGIN ~Holly the Elf~
 
